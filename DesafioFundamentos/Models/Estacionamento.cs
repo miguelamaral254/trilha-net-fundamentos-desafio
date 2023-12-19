@@ -16,12 +16,25 @@ namespace DesafioFundamentos.Models
             this.precoPorHora = precoPorHora;
         }
 
+        private string FormatarPlaca(string placa)
+        {
+            
+            string placaLimpa = placa.Replace(" ", "").ToUpper();
+
+            return placaLimpa;
+        }
+
         public void AdicionarVeiculo()
         {
-            Console.WriteLine("Digite a placa do veículo para estacionar (LLL-NLNN):");
+            Console.WriteLine("Digite a placa do veículo para estacionar [LLL - NLNN]:");
             string placa = Console.ReadLine();
 
+            // Formata a placa
+            placa = FormatarPlaca(placa);
+
+            // Adiciona a placa à lista de veículos
             veiculos.Add(placa);
+
             Console.WriteLine($"Veículo com placa {placa} foi estacionado com sucesso!");
         }
 
@@ -29,7 +42,7 @@ namespace DesafioFundamentos.Models
         {
             if (veiculos.Any())
             {
-                Console.WriteLine("------[Veículos estacionados]------");
+                Console.WriteLine("Veículos estacionados:");
 
                 for (int i = 0; i < veiculos.Count; i++)
                 {
@@ -78,11 +91,11 @@ namespace DesafioFundamentos.Models
 
         public void ListarVeiculos()
         {
-            Console.WriteLine("---------[Veículos estacinados]---------");
+            Console.WriteLine("---------[Veículos]---------");
 
             for (int i = 0; i < veiculos.Count; i++)
             {
-                Console.WriteLine($"{i + 1} - {veiculos[i]}");
+                Console.WriteLine($"{i + 1} - [{veiculos[i]}]");
             }
 
             if (!veiculos.Any())
