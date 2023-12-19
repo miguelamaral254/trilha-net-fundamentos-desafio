@@ -18,26 +18,45 @@ namespace DesafioFundamentos.Models
 
         private string FormatarPlaca(string placa)
         {
-            
+            // Remove espaços em branco e converte para maiúsculas
             string placaLimpa = placa.Replace(" ", "").ToUpper();
 
-            return placaLimpa;
+            // Verifica se a placa tem a formatação correta (LLLNLNN)
+            if (placaLimpa.Length == 7 &&
+                char.IsLetter(placaLimpa[0]) && char.IsLetter(placaLimpa[1]) && char.IsLetter(placaLimpa[2]) &&
+                char.IsDigit(placaLimpa[3]) && char.IsLetter(placaLimpa[4]) && char.IsDigit(placaLimpa[5]) && 
+                char.IsDigit(placaLimpa[6]))
+            {
+                // Formata a placa com a máscara (LLL - NLNN)
+                return $"{placaLimpa.Substring(0, 3)} - {placaLimpa.Substring(3)}";
+            }
+            else
+            {
+                Console.WriteLine("Placa inválida. A placa deve seguir o padrão LLLNLNN.");
+                return null;
+            }
         }
 
         public void AdicionarVeiculo()
         {
-            Console.WriteLine("Digite a placa do veículo para estacionar [LLL - NLNN]:");
+            Console.WriteLine("Digite a placa do veículo para estacionar (LLLNLNN):");
             string placa = Console.ReadLine();
 
             // Formata a placa
-            placa = FormatarPlaca(placa);
+            string placaFormatada = FormatarPlaca(placa);
 
-            // Adiciona a placa à lista de veículos
-            veiculos.Add(placa);
+            if (placaFormatada != null)
+            {
+                // Adiciona a placa à lista de veículos
+                veiculos.Add(placaFormatada);
 
-            Console.WriteLine($"Veículo com placa {placa} foi estacionado com sucesso!");
+                Console.WriteLine($"Veículo com placa {placaFormatada} foi estacionado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Por favor, tente novamente.");
+            }
         }
-
         public void RemoverVeiculo()
         {
             if (veiculos.Any())
@@ -46,7 +65,7 @@ namespace DesafioFundamentos.Models
 
                 for (int i = 0; i < veiculos.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1} - {veiculos[i]}");
+                    Console.WriteLine($"{i + 1} - [{veiculos[i]}]");
                 }
 
                 Console.WriteLine("Digite o número do veículo que deseja remover:");
