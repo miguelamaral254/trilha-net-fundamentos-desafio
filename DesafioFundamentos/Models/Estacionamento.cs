@@ -18,7 +18,7 @@ namespace DesafioFundamentos.Models
 
         private string FormatarPlaca(string placa)
         {
-            // Remove espaços em branco e converte para maiúsculas
+            
             string placaLimpa = placa.Replace(" ", "").ToUpper();
 
             // Verifica se a placa tem a formatação correta (LLLNLNN)
