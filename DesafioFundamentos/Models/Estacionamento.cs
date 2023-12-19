@@ -61,13 +61,13 @@ namespace DesafioFundamentos.Models
         {
             if (veiculos.Any())
             {
-                Console.WriteLine("Veículos estacionados:");
+                Console.WriteLine("----[ Veículos estacionados ]----");
 
                 for (int i = 0; i < veiculos.Count; i++)
                 {
                     Console.WriteLine($"{i + 1} - [{veiculos[i]}]");
                 }
-
+                System.Console.WriteLine("-------------------------------"); 
                 Console.WriteLine("Digite o número do veículo que deseja remover:");
                 if (int.TryParse(Console.ReadLine(), out int opcao))
                 {
